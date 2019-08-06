@@ -19,8 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// include routes
+var api_routes = require('./routes/api.routes');
+
+// Kendi Custom Router'ımızı kullanıyoruz
+app.use('/api/', api_routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
