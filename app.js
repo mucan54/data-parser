@@ -19,6 +19,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // include routes
 var api_routes = require('./routes/api.routes');
+app.all('/*', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header("Access-Control-Allow-Headers", "X-Requested-With,     Content-Type");
+  next();
+});
+
 
 // Kendi Custom Router'ımızı kullanıyoruz
 app.use('/api/', api_routes);
@@ -38,5 +45,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(4000, function () {
+  console.log("Express server listening on port 3000");
+  });
 
 module.exports = app;

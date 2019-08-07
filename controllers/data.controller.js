@@ -155,7 +155,8 @@ const dataAdd = async (req,res) => {
                 dots_spaces(element,json_element,json_coloumn,colon_arr,colon_name,dashes[0]);
         
         });
-        res.set('Access-Control-Allow-Origin', '*');
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.send(json_element);
 
     } else {
