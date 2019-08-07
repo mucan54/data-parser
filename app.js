@@ -19,13 +19,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // include routes
 var api_routes = require('./routes/api.routes');
-app.all('/*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With,     Content-Type");
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
 
 // Kendi Custom Router'ımızı kullanıyoruz
 app.use('/api/', api_routes);
@@ -45,9 +44,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.listen(4000, function () {
-  console.log("Express server listening on port 3000");
-  });
 
 module.exports = app;
